@@ -1,10 +1,13 @@
 package ru.savimar.test.payroll.service;
 
+import ru.savimar.test.payroll.model.AbstractEmployee;
+import ru.savimar.test.payroll.model.EmployeeEnum;
 import ru.savimar.test.payroll.model.Manager;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.List;
 
 public class ManagerService extends AbstractEmployeeService implements IAbstractEmployeeService<Manager> {
 
@@ -15,15 +18,23 @@ public class ManagerService extends AbstractEmployeeService implements IAbstract
 
 
     @Override
-    public BigDecimal calculateSalary(Manager employee, LocalDate date) {
+    public BigDecimal calculateSalary(Manager employee, LocalDate date/*, List<AbstractEmployee> subordinates*/) {
+        BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, PERCENT, MAX, date);
+        BigDecimal salarySub = calculateSalaryAllSubordinates(employee.getSubordinates(), date, PERCENT_SUBORDINATES);
 
-        BigDecimal baseSalaryManager = calculateSalaryWithoutSubordinates(employee, date);
-        BigDecimal salarySub = calculateSalarySubordinates(employee.getSubordinates(), date, PERCENT_SUBORDINATES);
         return baseSalaryManager.add(salarySub);
     }
 
-    public BigDecimal calculateSalaryWithoutSubordinates(Manager employee, LocalDate date) {
-        return calculateSalaryWithPercent(employee, PERCENT, MAX, date);
-    }
+    private BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date, BigDecimal percent) {
+        for (AbstractEmployee abstractEmployee : list) {
+            if (abstractEmployee.getType().equals(EmployeeEnum.MANAGER)) {
 
+            } else {
+                salarySub = salarySub.add(calculateSalarySubordinates(abstractEmployee, date, PERCENT_SUBORDINATES));
+            }
+        }
+
+        return salarySub.multiply(percent).setScale(2, RoundingMode.HALF_UP);
+
+    }
 }

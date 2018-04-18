@@ -1,23 +1,24 @@
 package ru.savimar.test.payroll.model;
 
-import ru.savimar.test.payroll.model.util.EmployeeCollection;
 
+import ru.savimar.test.payroll.service.SalesService;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 public class Sales extends AbstractEmployee {
-
-   private EmployeeCollection subordinates;
-
-    public Sales() {
+   public Sales() {
         super();
         super.setType(EmployeeEnum.SALES);
     }
 
-    public EmployeeCollection getSubordinates() {
-        return subordinates;
-    }
-
-    public void setSubordinates(EmployeeCollection subordinates) {
-        this.subordinates = subordinates;
+    @Override
+    public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
+        SalesService service = new SalesService();
+        if(employee.getType().equals(EmployeeEnum.SALES)) {
+            return service.calculateSalary((Sales) employee, date);
+        }
+        return BigDecimal.ZERO;
     }
 }

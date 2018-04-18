@@ -5,6 +5,7 @@ import ru.savimar.test.payroll.model.AbstractEmployee;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
 public interface IAbstractEmployeeService <T extends AbstractEmployee>{
 
 

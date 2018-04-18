@@ -1,8 +1,11 @@
 package ru.savimar.test.payroll.model;
 
-import ru.savimar.test.payroll.model.util.EmployeeCollection;
 
-import java.util.List;
+import ru.savimar.test.payroll.service.ManagerService;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 
 public class Manager extends AbstractEmployee{
 
@@ -11,13 +14,13 @@ public class Manager extends AbstractEmployee{
         super.setType(EmployeeEnum.MANAGER);
     }
 
-    private EmployeeCollection subordinates;
 
-    public EmployeeCollection getSubordinates() {
-        return subordinates;
-    }
-
-    public void setSubordinates(EmployeeCollection subordinates) {
-        this.subordinates = subordinates;
+    @Override
+    public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
+        ManagerService service = new ManagerService();
+        if(employee.getType().equals(EmployeeEnum.MANAGER)) {
+            return service.calculateSalary((Manager) employee, date);
+        }
+        return BigDecimal.ZERO;
     }
 }
