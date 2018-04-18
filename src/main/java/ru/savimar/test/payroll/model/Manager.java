@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-public class Manager extends AbstractEmployee{
+public class Manager extends AbstractEmployee {
 
     public Manager() {
         super();
@@ -18,7 +18,7 @@ public class Manager extends AbstractEmployee{
     @Override
     public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
         ManagerService service = new ManagerService();
-        if(employee.getType().equals(EmployeeEnum.MANAGER)) {
+        if (employee.getType().equals(EmployeeEnum.MANAGER)) {
             return service.calculateSalary((Manager) employee, date);
         }
         return BigDecimal.ZERO;

@@ -8,15 +8,17 @@ import java.time.LocalDate;
 
 
 public class Sales extends AbstractEmployee {
-   public Sales() {
+
+    public Sales() {
         super();
         super.setType(EmployeeEnum.SALES);
     }
 
+
     @Override
     public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
         SalesService service = new SalesService();
-        if(employee.getType().equals(EmployeeEnum.SALES)) {
+        if (employee.getType().equals(EmployeeEnum.SALES)) {
             return service.calculateSalary((Sales) employee, date);
         }
         return BigDecimal.ZERO;

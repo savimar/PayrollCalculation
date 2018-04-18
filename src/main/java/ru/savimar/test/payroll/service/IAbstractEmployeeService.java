@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-public interface IAbstractEmployeeService <T extends AbstractEmployee>{
+public interface IAbstractEmployeeService<T extends AbstractEmployee> {
 
 
-   BigDecimal calculateSalary( T employee,  LocalDate date);
+    BigDecimal calculateSalary(T employee, LocalDate date);
 
 }
 

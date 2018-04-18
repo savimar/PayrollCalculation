@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Employee extends AbstractEmployee {
     private List<AbstractEmployee> list;
+
     public Employee() {
         super();
         super.setType(EmployeeEnum.EMPLOYEE);
@@ -22,7 +23,7 @@ public class Employee extends AbstractEmployee {
     @Override
     public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
         EmployeeService service = new EmployeeService();
-        if(employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
+        if (employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
             return service.calculateSalary((Employee) employee, date);
         }
         return BigDecimal.ZERO;
@@ -30,7 +31,7 @@ public class Employee extends AbstractEmployee {
 
     @Override
     public void setSubordinates(List<AbstractEmployee> subordinates) {
-        subordinates = list;
+        super.setSubordinates(list);
     }
 
     @Override
