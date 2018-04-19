@@ -1,15 +1,12 @@
 package ru.savimar.test.payroll.service;
 
 import ru.savimar.test.payroll.model.AbstractEmployee;
-import ru.savimar.test.payroll.model.EmployeeEnum;
-import ru.savimar.test.payroll.model.Manager;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.List;
 
- class AbstractEmployeeService {
+class AbstractEmployeeService {
     BigDecimal salarySub = BigDecimal.valueOf(0).setScale(2, RoundingMode.HALF_UP);
 
 
@@ -36,9 +33,9 @@ import java.util.List;
 
     BigDecimal calculateSalaryOneEmployee(AbstractEmployee employee, LocalDate date) {
 
-        BigDecimal salary = salarySub.add(employee.getSalary(employee, date));
+        BigDecimal salary = employee.getSalary(employee, date);
 
-        return salary.setScale(2, RoundingMode.HALF_UP);
+        return salarySub.add(salary.setScale(2, RoundingMode.HALF_UP));
     }
 
 

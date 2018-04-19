@@ -20,6 +20,7 @@ public class Sales extends AbstractEmployee {
         super.setEmploymentDate(employmentDate);
         super.setSubordinates(employees);
     }
+
     @Override
     public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
         SalesService service = new SalesService();

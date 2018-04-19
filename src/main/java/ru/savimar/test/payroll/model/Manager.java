@@ -14,10 +14,11 @@ public class Manager extends AbstractEmployee {
         super();
         super.setType(EmployeeEnum.MANAGER);
     }
+
     public Manager(LocalDate employmentDate, List<AbstractEmployee> employees) {
-      this();
-      super.setEmploymentDate(employmentDate);
-      super.setSubordinates(employees);
+        this();
+        super.setEmploymentDate(employmentDate);
+        super.setSubordinates(employees);
     }
 
     @Override
