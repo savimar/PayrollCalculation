@@ -1,6 +1,8 @@
-package ru.savimar.test.payroll.service;
+package ru.savimar.payroll.service;
 
-import ru.savimar.test.payroll.model.AbstractEmployee;
+
+
+import ru.savimar.payroll.model.AbstractEmployee;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

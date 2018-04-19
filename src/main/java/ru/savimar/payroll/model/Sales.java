@@ -4,7 +4,6 @@ package ru.savimar.payroll.model;
 import ru.savimar.payroll.service.IAbstractEmployeeService;
 import ru.savimar.payroll.service.SalesService;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;

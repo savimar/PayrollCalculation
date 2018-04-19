@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 public interface IAbstractEmployeeService<T extends AbstractEmployee> {
 
-
     BigDecimal calculateSalary(T employee, LocalDate date);
 
     }
