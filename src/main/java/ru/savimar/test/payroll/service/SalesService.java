@@ -19,13 +19,8 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
     public BigDecimal calculateSalary(Sales employee, LocalDate date) {
         BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, PERCENT, MAX, date);
 
-
         salarySub = calculateSalaryAllSubordinates(employee.getSubordinates(), date);
-       salarySub= salarySub.multiply(PERCENT_SUBORDINATES);
-        /*for (AbstractEmployee sub : employee.getSubordinates()) {
-            salarySub = salarySub.add(calculateSalaryOneEmployee(sub, date));
-        }
-*/
+        salarySub = salarySub.multiply(PERCENT_SUBORDINATES);
 
         return baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
     }
@@ -42,7 +37,7 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
                 calculateSalaryAllSubordinates(subSubordinates, date);
             }
             list.remove(employee);
-            if (list.size() >0) {
+            if (list.size() > 0) {
                 calculateSalaryAllSubordinates(list, date);
             }
 

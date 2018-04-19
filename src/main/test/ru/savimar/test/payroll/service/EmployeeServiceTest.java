@@ -1,29 +1,40 @@
 package ru.savimar.test.payroll.service;
 
-import org.junit.Before;
 import org.junit.Test;
-import ru.savimar.test.payroll.model.Employee;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
+import static org.junit.Assert.assertEquals;
+import static ru.savimar.test.payroll.service.TestData.*;
+
 public class EmployeeServiceTest {
-    private Employee employee1;
-    private Employee employee2;
-
-
-    @Before
-    public void setUp() throws Exception {
-
-        employee1 = new Employee();
-        employee1.setEmploymentDate(LocalDate.of(2017, 2, 6));
-
-        employee2 = new Employee();
-        employee2.setEmploymentDate(LocalDate.of(2015, 1, 25));
-
-    }
 
     @Test(expected = ArithmeticException.class)
     public void calculateSalaryException() {
-        employee1.getSalary(employee1, LocalDate.of(2016, 05, 07));
+        EMPLOYEE2.getSalary(EMPLOYEE2, LocalDate.of(2014, 5, 7));
     }
+
+    @Test
+    public void calculateSalaryEmployee1() {
+        BigDecimal salary = EMPLOYEE1.getSalary(EMPLOYEE1, LocalDate.of(2018, 4, 1));
+        double years = 2018 - 2007;
+        double q = 0.03 * years;
+        q = q > 0.3 ? 0.3 : q;
+        double s = 20000 + (20000 * q);
+
+        assertEquals(BigDecimal.valueOf(s).setScale(2, RoundingMode.HALF_UP), EMPLOYEE1_SALARY);
+        assertEquals(EMPLOYEE1_SALARY, salary.setScale(2, RoundingMode.HALF_UP));
+    }
+
+    @Test
+    public void calculateSalaryEmployee2() {
+        BigDecimal salary = EMPLOYEE2.getSalary(EMPLOYEE2, LocalDate.of(2018, 4, 1));
+        long s = 20000 + (long) (20000 * ((2018 - 2015) * 0.03));
+        assertEquals(BigDecimal.valueOf(s).setScale(2, RoundingMode.HALF_UP), EMPLOYEE2_SALARY);
+        assertEquals(EMPLOYEE2_SALARY, salary.setScale(2, RoundingMode.HALF_UP));
+    }
+
+
 }

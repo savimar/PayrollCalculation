@@ -15,8 +15,7 @@ public class Main {
 
         List<AbstractEmployee> employees = new ArrayList<>();
 
-        Employee employee1 = new Employee();
-        employee1.setEmploymentDate(LocalDate.of(2017, 2, 6));
+        Employee employee1 = new Employee(LocalDate.of(2017, 2, 6));
 
         System.out.println("employee1 " + employee1.getSalary(employee1, LocalDate.now()));
 
