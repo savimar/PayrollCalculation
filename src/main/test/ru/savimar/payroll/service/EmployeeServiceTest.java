@@ -1,4 +1,4 @@
-package ru.savimar.test.payroll.service;
+package ru.savimar.payroll.service;
 
 import org.junit.Test;
 

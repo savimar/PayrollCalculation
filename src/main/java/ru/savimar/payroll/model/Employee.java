@@ -1,8 +1,9 @@
-package ru.savimar.test.payroll.model;
+package ru.savimar.payroll.model;
 
 
-import ru.savimar.test.payroll.service.EmployeeService;
-import ru.savimar.test.payroll.service.IAbstractEmployeeService;
+
+import ru.savimar.payroll.service.IAbstractEmployeeService;
+import ru.savimar.payroll.service.EmployeeService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

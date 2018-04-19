@@ -1,4 +1,4 @@
-package ru.savimar.test.payroll.model;
+package ru.savimar.payroll.model;
 
 public enum EmployeeEnum {
     EMPLOYEE, MANAGER, SALES

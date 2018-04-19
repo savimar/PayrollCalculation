@@ -1,4 +1,4 @@
-package ru.savimar.test.payroll.service;
+package ru.savimar.payroll.service;
 
 import org.junit.Test;
 
@@ -7,7 +7,6 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
-import static ru.savimar.test.payroll.service.TestData.*;
 
 
 public class SalesServiceTest extends TestData {

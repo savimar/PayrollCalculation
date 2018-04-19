@@ -1,4 +1,4 @@
-package ru.savimar.test.payroll.model;
+package ru.savimar.payroll.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,9 +1,9 @@
-package ru.savimar.test.payroll;
+package ru.savimar.payroll;
 
-import ru.savimar.test.payroll.model.AbstractEmployee;
-import ru.savimar.test.payroll.model.Employee;
-import ru.savimar.test.payroll.model.Manager;
-import ru.savimar.test.payroll.model.Sales;
+import ru.savimar.payroll.model.AbstractEmployee;
+import ru.savimar.payroll.model.Employee;
+import ru.savimar.payroll.model.Manager;
+import ru.savimar.payroll.model.Sales;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
