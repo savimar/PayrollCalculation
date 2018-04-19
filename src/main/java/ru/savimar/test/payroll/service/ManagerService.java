@@ -17,13 +17,12 @@ public class ManagerService extends AbstractEmployeeService implements IAbstract
     @Override
     public BigDecimal calculateSalary(Manager employee, LocalDate date) {
 
-        ManagerService service = new ManagerService();
-        BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, service.PERCENT, service.MAX, date);
+        BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, PERCENT, MAX, date);
         for (AbstractEmployee sub : employee.getSubordinates()) {
-            salarySub = salarySub.add(calculateSalaryOneEmployee(sub, date));
+         salarySub =  calculateSalaryOneEmployee(sub, date);
         }
         salarySub = salarySub.multiply(PERCENT_SUBORDINATES);
-        return /*calculateManagerSubSalary(employee, date, PERCENT_SUBORDINATES)*/ baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+        return baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
     }
 
 

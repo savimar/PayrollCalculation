@@ -1,7 +1,6 @@
 package ru.savimar.test.payroll.service;
 
 import ru.savimar.test.payroll.model.AbstractEmployee;
-import ru.savimar.test.payroll.model.EmployeeEnum;
 import ru.savimar.test.payroll.model.Sales;
 
 import java.math.BigDecimal;
@@ -19,24 +18,37 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
     @Override
     public BigDecimal calculateSalary(Sales employee, LocalDate date) {
         BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, PERCENT, MAX, date);
-        //   salarySub = salarySub.add(calculateSalaryAllSubordinates(employee.getSubordinates(), date));
-        return baseSalaryManager.add(salarySub);
+
+
+        salarySub = calculateSalaryAllSubordinates(employee.getSubordinates(), date);
+       salarySub= salarySub.multiply(PERCENT_SUBORDINATES);
+        /*for (AbstractEmployee sub : employee.getSubordinates()) {
+            salarySub = salarySub.add(calculateSalaryOneEmployee(sub, date));
+        }
+*/
+
+        return baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
     }
 
 
     private BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date) {
+        if (list.size() > 0) {
+            AbstractEmployee employee = list.get(list.size() - 1);
 
-        AbstractEmployee employee = list.get(list.size() - 1);
-        if (employee.getType().equals(EmployeeEnum.SALES)) {
+            salarySub = calculateSalaryOneEmployee(employee, date);
 
-        } else {
-            /*salarySub = salarySub.add(calculateSalaryOneEmployee(employee, date, PERCENT_SUBORDINATES));
+            List<AbstractEmployee> subSubordinates = employee.getSubordinates();
+            if (subSubordinates != null && subSubordinates.size() > 0) {
+                calculateSalaryAllSubordinates(subSubordinates, date);
+            }
             list.remove(employee);
-            if (list.size() > 0) {
+            if (list.size() >0) {
                 calculateSalaryAllSubordinates(list, date);
-            }*/
+            }
+
+            return salarySub.setScale(2, RoundingMode.HALF_UP);
         }
-        return salarySub;
+        return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
     }
 
 

@@ -1,6 +1,9 @@
 package ru.savimar.test.payroll;
 
-import ru.savimar.test.payroll.model.*;
+import ru.savimar.test.payroll.model.AbstractEmployee;
+import ru.savimar.test.payroll.model.Employee;
+import ru.savimar.test.payroll.model.Manager;
+import ru.savimar.test.payroll.model.Sales;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<AbstractEmployee> employees1 = new ArrayList<>();
+        List<AbstractEmployee> employees = new ArrayList<>();
 
         Employee employee1 = new Employee();
         employee1.setEmploymentDate(LocalDate.of(2017, 2, 6));
@@ -22,13 +25,16 @@ public class Main {
 
         System.out.println("employee2 " + employee2.getSalary(employee2, LocalDate.now()));
 
+        employees.add(employee1);
+        employees.add(employee2);
+
         Sales sales1 = new Sales();
         sales1.setEmploymentDate(LocalDate.of(2017, 8, 17));
-        sales1.setSubordinates(employees1);
+        sales1.setSubordinates(employees);
 
-        System.out.println("sales1 "+ sales1.getSalary(sales1, LocalDate.now()));
+        System.out.println("sales1 " + sales1.getSalary(sales1, LocalDate.now()));
 
-
+        List<AbstractEmployee> employees1 = new ArrayList<>();
         employees1.add(employee1);
         employees1.add(employee2);
         employees1.add(sales1);
@@ -64,7 +70,8 @@ public class Main {
 
         System.out.println("manager2 " + manager2.getSalary(manager2, LocalDate.now()));
 
-List<AbstractEmployee> employees3 = new ArrayList<>();
+        List<AbstractEmployee> employees3 = new ArrayList<>();
+
         employees3.add(manager2);
         employees3.add(sales1);
         employees3.add(employee2);
@@ -73,7 +80,7 @@ List<AbstractEmployee> employees3 = new ArrayList<>();
         sales2.setEmploymentDate(LocalDate.of(2013, 2, 12));
         sales2.setSubordinates(employees3);
 
-        System.out.println("sales2 "+ sales2.getSalary(sales2, LocalDate.now()));
+        System.out.println("sales2 " + sales2.getSalary(sales2, LocalDate.now()));
 
 
     }

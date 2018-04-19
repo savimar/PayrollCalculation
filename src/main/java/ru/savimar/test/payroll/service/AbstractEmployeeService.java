@@ -41,9 +41,11 @@ public class AbstractEmployeeService {
 
     }
 
-    BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date, BigDecimal percentSub) {
+   /* BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date, BigDecimal percentSub) {
         for (AbstractEmployee abstractEmployee : list) {
-            if (abstractEmployee.getType().equals(EmployeeEnum.EMPLOYEE)) {
+            salarySub = salarySub.add(calculateSalaryOneEmployee(abstractEmployee, date));
+            salarySub = salarySub.multiply(percentSub);
+          *//*  if (abstractEmployee.getType().equals(EmployeeEnum.EMPLOYEE)) {
                 salarySub = salarySub.add(calculateSalaryOneEmployee(abstractEmployee, date));
                 salarySub = salarySub.multiply(percentSub);
 
@@ -54,12 +56,12 @@ public class AbstractEmployeeService {
                 salarySub = manager.getSalary(abstractEmployee, date);
 
 
-            }
+            }*//*
         }
 
         return salarySub.setScale(2, RoundingMode.HALF_UP);
 
-    }
+    }*/
 
     /*BigDecimal calculateManagerSubSalary(Manager employee, LocalDate date, BigDecimal percentSub) {
      *//* AbstractEmployee abstractEmployee = list.get(list.size() - 1);
