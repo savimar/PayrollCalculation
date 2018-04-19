@@ -2,6 +2,7 @@ package ru.savimar.test.payroll.model;
 
 
 import ru.savimar.test.payroll.service.EmployeeService;
+import ru.savimar.test.payroll.service.IAbstractEmployeeService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,16 +25,6 @@ public class Employee extends AbstractEmployee {
         super.setEmploymentDate(employmentDate);
     }
 
-
-    @Override
-    public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
-        EmployeeService service = new EmployeeService();
-        if (employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
-            return service.calculateSalary((Employee) employee, date);
-        }
-        return BigDecimal.ZERO;
-    }
-
     @Override
     public void setSubordinates(List<AbstractEmployee> subordinates) {
         super.setSubordinates(list);
@@ -43,4 +34,15 @@ public class Employee extends AbstractEmployee {
     public List<AbstractEmployee> getSubordinates() {
         return null;
     }
+
+
+    @Override
+    public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
+        IAbstractEmployeeService<Employee> service = new EmployeeService();
+        if (employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
+            return service.calculateSalary((Employee) employee, date);
+        }
+        return BigDecimal.ZERO;
+    }
+
 }

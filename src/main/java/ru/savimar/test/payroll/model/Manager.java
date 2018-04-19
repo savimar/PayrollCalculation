@@ -1,6 +1,7 @@
 package ru.savimar.test.payroll.model;
 
 
+import ru.savimar.test.payroll.service.IAbstractEmployeeService;
 import ru.savimar.test.payroll.service.ManagerService;
 
 import java.math.BigDecimal;
@@ -23,7 +24,7 @@ public class Manager extends AbstractEmployee {
 
     @Override
     public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
-        ManagerService service = new ManagerService();
+        IAbstractEmployeeService<Manager> service = new ManagerService();
         if (employee.getType().equals(EmployeeEnum.MANAGER)) {
             return service.calculateSalary((Manager) employee, date);
         }
