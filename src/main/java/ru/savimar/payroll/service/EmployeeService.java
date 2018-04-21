@@ -1,7 +1,6 @@
 package ru.savimar.payroll.service;
 
 
-
 import ru.savimar.payroll.model.AbstractEmployee;
 import ru.savimar.payroll.model.EmployeeEnum;
 
@@ -10,7 +9,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 
-public  class EmployeeService implements IAbstractEmployeeService {
+public class EmployeeService implements IAbstractEmployeeService {
     private static final BigDecimal EMPLOYEE_PERCENT = new BigDecimal(0.03).setScale(2, RoundingMode.HALF_UP);
     private static final BigDecimal EMPLOYEE_MAX = new BigDecimal(0.3).setScale(2, RoundingMode.HALF_UP);
 
@@ -26,7 +25,23 @@ public  class EmployeeService implements IAbstractEmployeeService {
     private BigDecimal salarySub = BigDecimal.valueOf(0).setScale(2, RoundingMode.HALF_UP);
 
 
-    private BigDecimal calculateSalaryWithPercent(AbstractEmployee employee, BigDecimal percent, BigDecimal max, LocalDate date) {
+    private BigDecimal calculateSalaryWithPercent(AbstractEmployee employee, LocalDate date) {
+
+        BigDecimal percent = BigDecimal.ZERO;
+        BigDecimal max = BigDecimal.ZERO;
+
+        if (employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
+            percent = EMPLOYEE_PERCENT;
+            max = EMPLOYEE_MAX;
+        } else if (employee.getType().equals(EmployeeEnum.MANAGER)) {
+            percent = MANAGER_PERCENT;
+            max = MANAGER_MAX;
+
+        } else if (employee.getType().equals(EmployeeEnum.SALES)) {
+            percent = SALES_PERCENT;
+            max = SALES_MAX;
+        }
+
 
         int years = date.getYear() - employee.getEmploymentDate().getYear();
         if (years < 0) {
@@ -58,24 +73,22 @@ public  class EmployeeService implements IAbstractEmployeeService {
     @Override
     public BigDecimal calculateSalary(AbstractEmployee employee, LocalDate date) {
         BigDecimal salary = BigDecimal.ZERO;
-        if(employee.getType().equals(EmployeeEnum.EMPLOYEE)){
-            salary = calculateSalaryWithPercent(employee, EMPLOYEE_PERCENT, EMPLOYEE_MAX, date);
-        }
-        else if(employee.getType().equals(EmployeeEnum.MANAGER)){
-            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, MANAGER_PERCENT, MANAGER_MAX, date);
+        if (employee.getType().equals(EmployeeEnum.EMPLOYEE)) {
+            salary = calculateSalaryWithPercent(employee, date);
+        } else if (employee.getType().equals(EmployeeEnum.MANAGER)) {
+            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, date);
             for (AbstractEmployee sub : employee.getSubordinates()) {
                 salarySub = calculateSalaryOneEmployee(sub, date);
             }
             salarySub = salarySub.multiply(MANAGER_PERCENT_SUBORDINATES);
-            salary= baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
-        }
-        else if(employee.getType().equals(EmployeeEnum.SALES)){
-            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, SALES_PERCENT, SALES_MAX, date);
+            salary = baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+        } else if (employee.getType().equals(EmployeeEnum.SALES)) {
+            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, date);
 
             salarySub = calculateSalaryAllSubordinates(employee.getSubordinates(), date);
             salarySub = salarySub.multiply(SALES_PERCENT_SUBORDINATES);
 
-            salary= baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+            salary = baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
         }
 
         return salary;
