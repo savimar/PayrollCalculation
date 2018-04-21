@@ -22,9 +22,9 @@ public class SalesServiceTest extends TestData {
             double baseSalary = 20000 + ((2018 - 2012) * 0.01 * 20000);
             BigDecimal salarySub = manager1Salary.add(employee2Salary).add(employee1Salary).add(employee4Salary.add(employee3Salary));
             salarySub = salarySub.multiply(BigDecimal.valueOf(0.003));
-            BigDecimal salarysUBaNDbASE = salarySub.add(BigDecimal.valueOf(baseSalary));
+            BigDecimal salarySubAndBase = salarySub.add(BigDecimal.valueOf(baseSalary));
 
-            assertEquals(salarysUBaNDbASE.setScale(2, RoundingMode.HALF_UP), sales1Salary);
+            assertEquals(salarySubAndBase.setScale(2, RoundingMode.HALF_UP), sales1Salary);
             assertEquals(sales1Salary, salary.setScale(2, RoundingMode.HALF_UP));
         }
 
