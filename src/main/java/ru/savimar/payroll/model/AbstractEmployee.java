@@ -1,8 +1,5 @@
 package ru.savimar.payroll.model;
 
-import ru.savimar.payroll.service.EmployeeService;
-import ru.savimar.payroll.service.IAbstractEmployeeService;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -57,9 +54,5 @@ public abstract class AbstractEmployee {
         this.type = type;
     }
 
-    public BigDecimal getSalary(AbstractEmployee employee, LocalDate date) {
-
-        IAbstractEmployeeService service = new EmployeeService();
-        return service.calculateSalary(employee, date);
-    }
+    public abstract BigDecimal getSalary(AbstractEmployee employee, LocalDate date);
 }
