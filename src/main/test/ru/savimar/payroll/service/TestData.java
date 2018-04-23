@@ -63,7 +63,6 @@ public class TestData {
         employees1.add(employee4);
         employees1.add(manager1);
 
-
         sales1 = new Sales(LocalDate.of(2012, 9, 15), employees1);
         sales1Salary = BigDecimal.valueOf(21543.32).setScale(2, RoundingMode.HALF_UP);
 
