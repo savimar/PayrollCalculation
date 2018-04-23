@@ -41,22 +41,21 @@ abstract class AbstractEmployeeService {
         return salarySub.add(salary.setScale(2, RoundingMode.HALF_UP));
     }
 
-    BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date) {
-        List<AbstractEmployee> newList = new ArrayList<>();
-        newList.addAll(list);
+    BigDecimal calculateSalaryAllEmployees(List<AbstractEmployee> list, LocalDate date) {
+        List<AbstractEmployee> localList = new ArrayList<>(list);
 
-        if (list.size() > 0) {
-            AbstractEmployee employee = newList.get(newList.size() - 1);
+        if (localList.size() > 0) {
+            AbstractEmployee employee = localList.get(localList.size() - 1);
 
             salarySub = calculateSalaryOneEmployee(employee, date);
 
             List<AbstractEmployee> subSubordinates = employee.getSubordinates();
             if (subSubordinates != null && subSubordinates.size() > 0) {
-                calculateSalaryAllSubordinates(subSubordinates, date);
+                calculateSalaryAllEmployees(subSubordinates, date);
             }
-            newList.remove(employee);
-            if (newList.size() > 0) {
-                calculateSalaryAllSubordinates(newList, date);
+            localList.remove(employee);
+            if (localList.size() > 0) {
+                calculateSalaryAllEmployees(localList, date);
             }
 
             return salarySub.setScale(2, RoundingMode.HALF_UP);

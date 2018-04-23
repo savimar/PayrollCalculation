@@ -75,7 +75,7 @@ public class TestData {
 
 
         manager2 = new Manager(LocalDate.of(2017, 3, 14), employees2);
-        manager2Salary = BigDecimal.valueOf(21336.72).setScale(2, RoundingMode.HALF_UP);
+        manager2Salary = BigDecimal.valueOf(21337.91).setScale(2, RoundingMode.HALF_UP);
 
         employees3 = new ArrayList<>();
         employees3.add(employee4);
@@ -84,7 +84,7 @@ public class TestData {
 
 
         sales2 = new Sales(LocalDate.of(2018, 3, 22), employees3);
-        sales2Salary = BigDecimal.valueOf(20388.61).setScale(2, RoundingMode.HALF_UP);
+        sales2Salary = BigDecimal.valueOf(21221.42).setScale(2, RoundingMode.HALF_UP);
 
 
 
