@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,11 +30,14 @@ public class EmployeeServiceTest extends TestData {
 
     @Test
     public void calculateSalaryEmployee2() {
+        LocalDateTime prev = LocalDateTime.now();
         BigDecimal salary = employee2.getSalary(employee2, LocalDate.of(2018, 4, 1));
         long s = 20000 + (long) (20000 * ((2018 - 2015) * 0.03));
         assertEquals(BigDecimal.valueOf(s).setScale(2, RoundingMode.HALF_UP), employee2Salary);
         assertEquals(employee2Salary, salary.setScale(2, RoundingMode.HALF_UP));
+        System.out.println("calculateSalaryEmployee2() " + employee2Salary + " completed in " + (LocalDateTime.now().getNano() - prev.getNano()));
     }
+
     @Test
     public void calculateSalaryEmployee3() {
         BigDecimal salary = employee3.getSalary(employee3, LocalDate.of(2018, 4, 1));
