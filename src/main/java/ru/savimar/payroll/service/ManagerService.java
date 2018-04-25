@@ -18,7 +18,7 @@ public class ManagerService extends AbstractEmployeeService implements IAbstract
     public BigDecimal calculateSalary(Manager employee, LocalDate date) {
 
         BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, PERCENT, MAX, date);
-   salarySub = calculateSalaryAllEmployees(employee.getSubordinates(), date);
+        salarySub = calculateSalaryAllEmployees(employee.getSubordinates(), date);
 
         salarySub = salarySub.multiply(PERCENT_SUBORDINATES);
         return baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);

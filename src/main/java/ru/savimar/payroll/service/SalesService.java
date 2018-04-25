@@ -7,7 +7,6 @@ import ru.savimar.payroll.model.Sales;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +27,7 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
     }
 
     private BigDecimal calculateSalaryAllSubordinates(List<AbstractEmployee> list, LocalDate date) {
-        List<AbstractEmployee> localList = new ArrayList<>();
+      /*  List<AbstractEmployee> localList = new ArrayList<>();
         //list.parallelStream().forEach(el -> localList.add(el));
        list.forEach(el->localList.add(el));
        // localList.addAll(list);
@@ -46,12 +45,22 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
             localList.remove(employee);
             if (localList.size() > 0) {
                 calculateSalaryAllSubordinates(localList, date);
+            }*/
+
+        for (AbstractEmployee employee : list) {
+            salarySub = calculateSalaryOneEmployee(employee, date);
+            List<AbstractEmployee> subSubordinates = employee.getSubordinates();
+            if (subSubordinates != null && subSubordinates.size() > 0) {
+                for (AbstractEmployee subSubordinate : subSubordinates) {
+                    salarySub = calculateSalaryOneEmployee(subSubordinate, date);
+                }
             }
-
-            return salarySub.setScale(2, RoundingMode.HALF_UP);
         }
-        return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-    }
 
+        return salarySub.setScale(2, RoundingMode.HALF_UP);
+   /* }
+       return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+    }*/
+    }
 
 }
