@@ -39,27 +39,9 @@ public class SalesService extends AbstractEmployeeService implements IAbstractEm
                 calculateSalaryAllSubordinates(subordinates, date);
             }
         }
-       /* subSubordinates.add(list);
-        getSalarySubSubordinates(date);
-        subSubordinates.remove(list);
-        if(subSubordinates.size()>0){
-            getSalarySubSubordinates(date);
-        }*/
-
 
         return salarySub.setScale(2, RoundingMode.HALF_UP);
     }
 
-   /* private void getSalarySubSubordinates(LocalDate date) {
-        for (List<AbstractEmployee> employees : subSubordinates) {
-            for (AbstractEmployee employee : employees) {
-                salarySub = calculateSalaryOneEmployee(employee, date);
-                List<AbstractEmployee> subordinates = employee.getSubordinates();
-                if (subordinates != null && subordinates.size() > 0) {
-                    subSubordinates.add(subordinates);
-                }
-              }
-        }
-    }*/
 
 }
