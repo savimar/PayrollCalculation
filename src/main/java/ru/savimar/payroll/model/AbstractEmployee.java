@@ -46,11 +46,11 @@ public abstract class AbstractEmployee {
         this.employmentDate = employmentDate;
     }
 
-    public EmployeeEnum getType() {
+    EmployeeEnum getType() {
         return type;
     }
 
-    public void setType(EmployeeEnum type) {
+    void setType(EmployeeEnum type) {
         this.type = type;
     }
 

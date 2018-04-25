@@ -41,7 +41,7 @@ abstract class AbstractEmployeeService {
     }
 
     BigDecimal calculateSalaryAllEmployees(List<AbstractEmployee> list, LocalDate date) {
-      //  list.forEach(employee -> salarySub=calculateSalaryOneEmployee(employee, date));
+
         for (AbstractEmployee employee : list) {
             salarySub = calculateSalaryOneEmployee(employee, date);
         }
